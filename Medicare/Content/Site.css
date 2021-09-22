@@ -1,0 +1,21 @@
+﻿.background-image-fit {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.clickable-row {
+}
+.fake-accordion-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+}

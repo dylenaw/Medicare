@@ -1,0 +1,60 @@
+﻿@model Medicare.Models.User
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container px-md-5 px-md-1">
+
+    <div class="col-lg-6 mx-auto">
+
+        <h2>View doctor</h2>
+        @if (Model == null)
+        {
+            <div class="alert alert-warning" role="alert">
+                Doctor not found
+            </div>
+        }
+        else
+        {
+
+    <div>
+        <div class="form-floating mb-3">
+            @Html.TextBoxFor(u => u.Name, new { @class = "form-control ", placeholder = "Name", @readonly = "", disabled = "" })
+            @Html.LabelFor(u => u.Name)
+        </div>
+        <div class="form-floating mb-3">
+            @Html.TextBoxFor(u => u.Email, new { @class = "form-control ", placeholder = "Email address", @readonly = "", disabled = "" })
+            @Html.LabelFor(u => u.Email)
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="status" placeholder="Status" readonly disabled value=@(Model.DoctorRegistration==null?"Unauthorized":"Authorized")>
+            <label for="status">Status</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="registrationNumber" placeholder="Registration number" readonly disabled value=@(Model.DoctorRegistration==null?"N/A":Model.DoctorRegistration)>
+            <label for="registrationNumber">Registration number</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="specialization" placeholder="Specialization" readonly disabled value='@(Model.DoctorRegistration==null?"N/A":Model.Specialization.Name)'>
+            <label for="specialization">Specialization</label>
+        </div>
+
+        @if (Medicare.Models.SessionHandler.IsUserAdmin(Session))
+        {
+
+            @Html.ActionLink("Edit", "AdminEdit", "Doctors", new { id = Model.Id }, new { @class = "btn btn-lg w-100 btn-primary mb-2" })
+            @Html.ActionLink("Delete", "Delete", "Doctors", new { id = Model.Id }, new { @class = "btn btn-lg w-100 btn-danger mb-2" })
+        }
+        else if (Medicare.Models.SessionHandler.GetUserId(Session) == Model.Id)
+        {
+            @Html.ActionLink("Edit", "Edit", "Doctors", new { id = Model.Id }, new { @class = "btn btn-lg w-100 btn-primary mb-2" })
+
+        }
+
+    </div>
+
+
+        }
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model Medicare.Models.ViewModels.SignUpViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.EmptyBody.cshtml";
+}
+
+
+<div class="container">
+
+
+    <div class="px-4  my-5">
+        <div class="text-center mb-3">
+            <img class="mb-2 w-25" src="~/Content/Logos/FullLogo.png" alt="">
+            <h1 class="display-5 fw-bold">Sign up</h1>
+        </div>
+
+        <div class="col-lg-6 mx-auto">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @using (Html.BeginForm("SignUp", "SignUp", FormMethod.Post))
+            {
+                <div class="form-floating  mb-3">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Name" })
+                    @Html.LabelFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+
+                </div>
+                <div class="form-floating  mb-3">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email address" })
+                    @Html.LabelFor(m => m.Email)
+                    @Html.ValidationMessageFor(m => m.Email)
+
+                </div>
+                <div class="form-floating  mb-3">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                    @Html.LabelFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="form-floating  mb-3">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm password" })
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+
+                <div class="form-check form-switch mb-3 ">
+                    @Html.CheckBoxFor(m => m.IsDoctor, new { @class = "form-check-input" })
+                    @Html.LabelFor(m => m.IsDoctor, new { @class = "form-check-label" })
+                </div>
+
+                <button class="w-100 btn btn-lg btn-primary mb-2" type="submit">Sign up</button>
+                @Html.ActionLink("Already have an account? Sign in", null, "SignIn", null, new { @class = "btn rounded-4 mb-2 w-100" });
+
+            }
+        </div>
+    </div>
+
+
+</div>

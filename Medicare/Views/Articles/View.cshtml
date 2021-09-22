@@ -1,0 +1,16 @@
+﻿@model Medicare.Models.Article
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<article class="blog-post">
+    <h2 class="blog-post-title">@Model.Title</h2>
+    <p class="blog-post-meta">@(Model.Time.ToString("yyyy MMM dd hh.mm tt")) by <a href="#">@Model.User.Name</a></p>
+    @if (Medicare.Models.SessionHandler.GetUserId(Session) == Model.UserId) {
+        @Html.ActionLink("Edit", "Edit", "Articles",new { id=Model.Id}, new { @class = "mx-2" })
+        @Html.ActionLink("Delete", "Delete", "Articles",new { id=Model.Id}, new { @class = "mx-2 text-danger" })
+    }
+    
+    <hr>
+    <p>@Model.Description </p>
+ </article>

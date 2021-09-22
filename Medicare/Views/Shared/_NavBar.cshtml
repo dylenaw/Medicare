@@ -1,0 +1,37 @@
+﻿<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="~/Content/Logos/FullLogo.png" height="48" />
+        </a>
+
+        <ul class="nav nav-pills">
+
+            @if (Medicare.Models.SessionHandler.IsUserSignedIn(Session)) { 
+            <li class="nav-item">@Html.ActionLink("Dashboard", "", "dashboard", null, new { @class = "nav-link " + (ViewBag.Title == "Dashboard" ? "active" : null) })</li>
+            }
+            <li class="nav-item">@Html.ActionLink("Home","","",null,new { @class="nav-link "+(ViewBag.Title=="Home"?"active":null)})</li>
+            <li class="nav-item">@Html.ActionLink("Articles","","articles",null,new { @class="nav-link "+(ViewBag.Title.Contains("Article")?"active":null)})</li>
+            <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Gallery</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+            <li class="nav-item">
+                @if (Medicare.Models.SessionHandler.IsUserSignedIn(Session))
+                {
+                    @Html.ActionLink("Sign out", "signOut", "signIn", null, new { @class = "btn btn-outline-primary" })
+                }
+                else
+                {
+                    @*<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Sign in
+            </button>*@
+                    @Html.ActionLink("Sign in", "", "signIn", null, new { @class = "btn btn-outline-primary" })
+
+                }
+            </li>
+        </ul>
+    </header>
+</div>
+
+
+<!-- Modal -->

@@ -1,0 +1,35 @@
+﻿@model Medicare.Models.Article
+@{
+    ViewBag.Title = Model == null ? "New article" : "Update Article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@(Model==null?"New article":"Update Article")</h2>
+<hr />
+
+
+@using (Html.BeginForm("save","articles"))
+{
+    @Html.AntiForgeryToken()
+
+<div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-floating mb-3">
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Article title" })
+        @Html.LabelFor(model => model.Title)
+        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-floating mb-3">
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Type your article here...", rows = "16", style = "height:100%; white-space: pre-wrap;" })
+        @Html.LabelFor(model => model.Description)
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+    </div>
+    @Html.HiddenFor(model => model.Id)
+
+
+
+<button type="submit" class="w-100 btn btn-lg btn-primary  mb-2">Save article</button>
+</div>
+
+}

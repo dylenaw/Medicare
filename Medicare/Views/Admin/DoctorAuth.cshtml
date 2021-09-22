@@ -1,0 +1,57 @@
+﻿@model Medicare.Models.ViewModels.AdminDoctorAuthViewModel
+@{
+    ViewBag.Title = "DoctorAuth";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form>
+    <div class="input-group mb-3">
+        <input type="text" name="search" class="form-control" placeholder="Doctor name or email" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
+    </div>
+</form>
+
+
+<table class="table table-hover table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Registration number</th>
+            <th>Specialization</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Medicare.Models.User doctor in Model.Doctors)
+        {
+            <tr class="clickable-row" data-href="/doctors/view/@doctor.Id">
+                <td>
+                    @doctor.Name
+                </td>
+                <td>
+                    @doctor.Email
+                </td>
+
+                <td>
+                    <div class="form-floating mb-3">
+                        @Html.TextBoxFor(m => m.DoctorRegistration, new { @class = "form-control ", placeholder = "Registration number" })
+                        @Html.LabelFor(m => m.DoctorRegistration)
+                        @Html.ValidationMessageFor(m => m.DoctorRegistration)
+                    </div>
+
+                </td>
+                <td>
+                    <div class="form-floating mb-3">
+                        @Html.DropDownListFor(m => m.SpecializationId, new SelectList(Model.Specializations, "Id", "Name"), "Select specialization", new { @class = "form-select" })
+                        @Html.LabelFor(m => m.SpecializationId)
+                        @Html.ValidationMessageFor(m => m.SpecializationId)
+                    </div>                
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

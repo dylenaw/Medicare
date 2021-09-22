@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" id="custom-cards">
+    <h2 class="pb-2 border-bottom ">@(Medicare.Models.SessionHandler.GetUser(Session).Name)</h2>
+
+    @if (Medicare.Models.SessionHandler.IsUserAdmin(Session))
+    {
+        @Html.Partial("_DashboardAdmin")
+    }
+    else if (Medicare.Models.SessionHandler.IsUserDoctor(Session))
+    {
+        @Html.Partial("_DashboardDoctor")
+
+    }
+    else
+    {
+        //User is a patient
+        @Html.Partial("_DashboardPatient")
+
+    }
+    @if (!Medicare.Models.SessionHandler.IsUserAdmin(Session))
+    {
+        @Html.Partial("_DashboardUser")
+
+    }
+
+
+</div>

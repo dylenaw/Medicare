@@ -1,0 +1,54 @@
+﻿@model Medicare.Models.ViewModels.AdminDoctorEditViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container px-md-5 px-md-1">
+
+    <div class="col-lg-6 mx-auto">
+
+        <h2>Authorize doctor</h2>
+        @if (Model == null)
+        {
+            <div class="alert alert-warning" role="alert">
+                Doctor not found
+            </div>
+        }
+        else
+        {
+
+
+
+    <div>
+        @using (Html.BeginForm("save", "doctors"))
+        {
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control ", placeholder = "Name", @readonly = "", disabled = "" })
+                @Html.LabelFor(m => m.Name)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control ", placeholder = "Email address", @readonly = "", disabled = "" })
+                @Html.LabelFor(m => m.Email)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(m => m.DoctorRegistration, new { @class = "form-control ", placeholder = "Registration number" })
+                @Html.LabelFor(m => m.DoctorRegistration)
+                @Html.ValidationMessageFor(m=>m.DoctorRegistration)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.DropDownListFor(m => m.SpecializationId, new SelectList(Model.Specializations, "Id", "Name"), "Select specialization", new { @class = "form-select" })
+                @Html.LabelFor(m => m.SpecializationId)
+                @Html.ValidationMessageFor(m => m.SpecializationId)
+
+            </div>
+            @Html.HiddenFor(m=>m.Id)
+            <button class="btn btn-primary mb-3 btn-lg w-100">Save</button>
+        }
+    </div>
+
+
+        }
+    </div>
+</div>

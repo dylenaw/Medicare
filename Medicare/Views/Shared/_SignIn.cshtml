@@ -1,0 +1,29 @@
+﻿@model Medicare.Models.ViewModels.SignInViewModel
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <!-- <h5 class="modal-title">Modal title</h5> -->
+                <h2 class="fw-bold mb-0">Sign In</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                @using (Html.BeginForm(null, "SignIn", FormMethod.Post))
+                {
+
+                    <div class="form-floating mb-3">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control site-width-100", placeholder = "Email" })
+                        @Html.LabelFor(m => m.Email)
+                    </div>
+                    <div class="form-floating mb-3">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.LabelFor(m => m.Password)
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign in</button>
+                    @Html.ActionLink("New to Medicare? Sign up",  null,"signUp",null, new { @class = "btn rounded-4 mb-2 w-100" });
+                }
+            </div>
+        </div>
+    </div>
+</div>

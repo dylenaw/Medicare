@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Medicare.Models.User>
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form>
+    <div class="input-group mb-3">
+        <input type="text" name="search" class="form-control" placeholder="Doctor name or email" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
+    </div>
+</form>
+
+
+<table class="table table-hover table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Registration number</th>
+            <th>Specialization</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Medicare.Models.User doctor in Model)
+        {
+            <tr class="clickable-row" data-href="/doctors/view/@doctor.Id">
+                <td>@doctor.Name</td>
+                <td>@doctor.Email</td>
+                <td>@(doctor.DoctorRegistration==null?"Unauthorized":"Authorized")</td>
+                <td>@(doctor.DoctorRegistration==null?"N/A":doctor.DoctorRegistration)</td>
+                <td>@(doctor.DoctorRegistration==null?"N/A":doctor.Specialization.Name)</td>
+
+                <td>
+                    <div class="input-group">
+                        @Html.ActionLink("View", "View", "Doctors",new { id=doctor.Id}, htmlAttributes: new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edit", "AdminEdit", "Doctors", new { id = doctor.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Delete", "Delete", "Doctors",new { id=doctor.Id}, htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

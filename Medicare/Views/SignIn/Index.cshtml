@@ -1,0 +1,35 @@
+﻿@model Medicare.Models.ViewModels.SignInViewModel
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.EmptyBody.cshtml";
+}
+<div class="text-center">
+
+    <main class="container p-md-5 p-sm-1">
+
+            <div class="px-4 py-5 my-5 text-center">
+                <img class="mb-4 w-25" src="~/Content/Logos/FullLogo.png" alt="">
+                <h1 class="display-5 fw-bold">Sign in</h1>
+                <div class="col-lg-6 mx-auto">
+
+                    @using (Html.BeginForm("SignIn", "SignIn", FormMethod.Post))
+                    {
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email address" })
+                            @Html.LabelFor(m => m.Email)
+                            @Html.ValidationMessageFor(m => m.Email)
+                        </div>
+                        <div class="form-floating mb-3">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                            @Html.LabelFor(m => m.Password)
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                        <button class="w-100 btn btn-lg btn-primary mb-2" type="submit">Sign in</button>
+                        @Html.ActionLink("New to Medicare? Sign up", null, "SignUp", null, new { @class = "btn rounded-4 mb-2 w-100" });
+
+                    }
+                </div>
+            </div>
+    </main>
+</div>
