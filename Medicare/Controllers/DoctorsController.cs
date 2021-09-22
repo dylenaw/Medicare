@@ -90,10 +90,11 @@ namespace Medicare.Controllers
                 dbDoctor.SpecializationId = doctor.SpecializationId; 
                 database.SaveChanges();
 
+
                 return RedirectToAction("doctors", "admin");
 
             }
-            database.SaveChanges();
+            //database.SaveChanges();
             return RedirectToAction("", "dashboard");
         }
     }
