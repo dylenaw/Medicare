@@ -14,6 +14,7 @@ namespace Medicare.Models
         public DbSet<Article> Articles { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<BloodType> BloodTypes { get; set; }
 
     }
 }

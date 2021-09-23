@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Medicare.Models.User>
+
+@{
+    ViewBag.Title = "Patients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form>
+    <div class="input-group mb-3">
+        <input type="text" name="search" class="form-control" placeholder="Patient name or email" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
+    </div>
+</form>
+
+
+<table class="table table-hover table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Gender</th>
+            <th>Blood type</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Medicare.Models.User patient in Model)
+        {
+            <tr>
+                <td>@patient.Name</td>
+                <td>@patient.Email</td>
+                <td>@patient.Address</td>
+                <td>@patient.Gender</td>
+                <td>@(patient.BloodType==null?"N/A":string.Format("{0} {1}", patient.BloodType.Name,patient.BloodType.IsRhPositive?"+":"-"))</td>
+
+                <td>
+                    <div class="input-group">
+                        @Html.ActionLink("View", "View", "Patients", new { id = patient.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edit", "AdminEdit", "Patients", new { id = patient.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                        <button class="btn btn-danger button-confirm" data-title="Confirm delete" data-body="Are you sure you want to delete?" data-href="\doctors\delete\@patient.Id">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

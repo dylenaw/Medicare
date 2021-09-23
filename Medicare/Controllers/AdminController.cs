@@ -1,4 +1,5 @@
 ﻿using Medicare.Models;
+using Medicare.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -50,8 +51,33 @@ namespace Medicare.Controllers
             }
 
             List<User> doctors = query.ToList();
+            List<Specialization> specializations = database.Specializations.ToList();
 
-            return View(doctors);
+            return View(
+                new AdminDoctorAuthViewModel { 
+                    Doctors=doctors,
+                    Specializations=specializations,
+                }
+                );
+        }
+
+
+
+
+        public ActionResult Patients(string search)
+        {
+            if (!SessionHandler.IsUserAdmin(Session)) return RedirectToAction("", "dashboard");
+
+            IQueryable<User> query = database.Users.Include(u=>u.BloodType).Where(d => !d.IsDoctor && !d.IsAdmin);
+
+            if (search != null)
+            {
+                query = query.Where(d => d.Name.Contains(search) || d.Email.Contains(search));
+            }
+
+            List<User> patients = query.ToList();
+
+            return View(patients);
         }
     }
 }

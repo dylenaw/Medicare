@@ -1,4 +1,4 @@
-﻿@model Medicare.Models.ViewModels.AdminDoctorEditViewModel
+﻿@model Medicare.Models.ViewModels.AdminEditViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -25,25 +25,25 @@
         @using (Html.BeginForm("save", "doctors"))
         {
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control ", placeholder = "Name", @readonly = "", disabled = "" })
-                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.User.Name, new { @class = "form-control ", placeholder = "Name", @readonly = "", disabled = "" })
+                @Html.LabelFor(m => m.User.Name)
             </div>
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control ", placeholder = "Email address", @readonly = "", disabled = "" })
-                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control ", placeholder = "Email address", @readonly = "", disabled = "" })
+                @Html.LabelFor(m => m.User.Email)
             </div>
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(m => m.DoctorRegistration, new { @class = "form-control ", placeholder = "Registration number" })
-                @Html.LabelFor(m => m.DoctorRegistration)
-                @Html.ValidationMessageFor(m=>m.DoctorRegistration)
+                @Html.TextBoxFor(m => m.User.DoctorRegistration, new { @class = "form-control ", placeholder = "Registration number" })
+                @Html.LabelFor(m => m.User.DoctorRegistration)
+                @Html.ValidationMessageFor(m=>m.User.DoctorRegistration)
             </div>
             <div class="form-floating mb-3">
-                @Html.DropDownListFor(m => m.SpecializationId, new SelectList(Model.Specializations, "Id", "Name"), "Select specialization", new { @class = "form-select" })
-                @Html.LabelFor(m => m.SpecializationId)
-                @Html.ValidationMessageFor(m => m.SpecializationId)
+                @Html.DropDownListFor(m => m.User.SpecializationId, new SelectList(Model.Specializations, "Id", "Name"), "Select specialization", new { @class = "form-select" })
+                @Html.LabelFor(m => m.User.SpecializationId)
+                @Html.ValidationMessageFor(m => m.User.SpecializationId)
 
             </div>
-            @Html.HiddenFor(m=>m.Id)
+            @Html.HiddenFor(m=>m.User.Id)
             <button class="btn btn-primary mb-3 btn-lg w-100">Save</button>
         }
     </div>

@@ -1,6 +1,7 @@
 
 namespace Medicare.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -27,5 +28,11 @@ namespace Medicare.Models
 
         public  BloodType BloodType { get; set; }
         public  Specialization Specialization { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+
+        }
     }
 }

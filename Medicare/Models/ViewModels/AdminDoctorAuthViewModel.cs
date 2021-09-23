@@ -9,7 +9,7 @@ namespace Medicare.Models.ViewModels
     public class AdminDoctorAuthViewModel
     {
 
-        public IQueryable<User> Doctors { get; set; }
+        public List<User> Doctors { get; set; }
         public int Id { get; set; }
             public string Name { get; set; }
             public string Email { get; set; }

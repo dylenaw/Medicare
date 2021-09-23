@@ -66,13 +66,9 @@ namespace Medicare.Controllers
             User doctor = database.Users.Include(d => d.Specialization).Where(d => d.IsDoctor && d.Id == id).SingleOrDefault();
             List<Specialization> specializations = database.Specializations.ToList();
             return View(
-                new AdminDoctorEditViewModel
+                new AdminEditViewModel
                 {
-                    Id = doctor.Id,
-                    Name = doctor.Name,
-                    Email = doctor.Email,
-                    DoctorRegistration=doctor.DoctorRegistration,
-                    SpecializationId = doctor.SpecializationId,
+                    User=doctor,
                     Specializations = specializations
                 }
                 );
@@ -81,20 +77,36 @@ namespace Medicare.Controllers
         {
             return View();
         }
-        public ActionResult Save(User doctor)
+        public ActionResult Save(User user)
         {
-            User dbDoctor = database.Users.Single(d => d.Id == doctor.Id);
+            User dbDoctor = database.Users.Single(d => d.Id == user.Id);
             if (SessionHandler.IsUserAdmin(Session))
             {
-                dbDoctor.DoctorRegistration = doctor.DoctorRegistration;
-                dbDoctor.SpecializationId = doctor.SpecializationId; 
+                dbDoctor.DoctorRegistration = user.DoctorRegistration;
+                dbDoctor.SpecializationId = user.SpecializationId;
                 database.SaveChanges();
 
 
                 return RedirectToAction("doctors", "admin");
 
             }
-            //database.SaveChanges();
+            database.SaveChanges();
+            return RedirectToAction("", "dashboard");
+        }
+        public ActionResult AuthSave(User doctor)
+        {
+            User dbDoctor = database.Users.Single(d => d.Id == doctor.Id);
+            if (SessionHandler.IsUserAdmin(Session))
+            {
+                dbDoctor.DoctorRegistration = doctor.DoctorRegistration;
+                dbDoctor.SpecializationId = doctor.SpecializationId;
+                database.SaveChanges();
+
+
+                return RedirectToAction("doctorAuth", "admin");
+
+            }
+            database.SaveChanges();
             return RedirectToAction("", "dashboard");
         }
     }

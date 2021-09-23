@@ -11,47 +11,64 @@
     </div>
 </form>
 
+@if (Model.Doctors.Count == 0)
+{
 
-<table class="table table-hover table-responsive table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Registration number</th>
-            <th>Specialization</th>
-            <th></th>
+    <div class="alert alert-warning" role="alert">
+        No doctors requesting access yet!
+    </div>
+}
+else
+{
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Medicare.Models.User doctor in Model.Doctors)
-        {
-            <tr class="clickable-row" data-href="/doctors/view/@doctor.Id">
-                <td>
-                    @doctor.Name
-                </td>
-                <td>
-                    @doctor.Email
-                </td>
-
-                <td>
-                    <div class="form-floating mb-3">
-                        @Html.TextBoxFor(m => m.DoctorRegistration, new { @class = "form-control ", placeholder = "Registration number" })
-                        @Html.LabelFor(m => m.DoctorRegistration)
-                        @Html.ValidationMessageFor(m => m.DoctorRegistration)
-                    </div>
-
-                </td>
-                <td>
-                    <div class="form-floating mb-3">
-                        @Html.DropDownListFor(m => m.SpecializationId, new SelectList(Model.Specializations, "Id", "Name"), "Select specialization", new { @class = "form-select" })
-                        @Html.LabelFor(m => m.SpecializationId)
-                        @Html.ValidationMessageFor(m => m.SpecializationId)
-                    </div>                
-                </td>
-
+    <table class="table table-hover table-responsive table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Registration number</th>
+                <th>Specialization</th>
+                <th></th>
 
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (Medicare.Models.User doctor in Model.Doctors)
+            {
+                <tr>
+
+                    @using (Html.BeginForm("authsave", "doctors"))
+                    {
+                        <input type="hidden" name="id" value="@doctor.Id" />
+                        <td>
+                            @doctor.Name
+                        </td>
+                        <td>
+                            @doctor.Email
+                        </td>
+                        <td>
+                            <div class="form-floating">
+                                @Html.TextBoxFor(m => m.DoctorRegistration, new { @class = "form-control ", placeholder = "Registration number" })
+                                @Html.LabelFor(m => m.DoctorRegistration)
+                                @Html.ValidationMessageFor(m => m.DoctorRegistration)
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="form-floating">
+                                @Html.DropDownListFor(m => m.SpecializationId, new SelectList(Model.Specializations, "Id", "Name"), "Select specialization", new { @class = "form-select" })
+                                @Html.LabelFor(m => m.SpecializationId)
+                                @Html.ValidationMessageFor(m => m.SpecializationId)
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn w-100 " type="submit">Save</button>
+                        </td>
+                    }
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}

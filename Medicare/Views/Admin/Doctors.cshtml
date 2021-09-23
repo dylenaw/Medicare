@@ -28,18 +28,18 @@
     <tbody>
         @foreach (Medicare.Models.User doctor in Model)
         {
-            <tr class="clickable-row" data-href="/doctors/view/@doctor.Id">
+            <tr >
                 <td>@doctor.Name</td>
                 <td>@doctor.Email</td>
                 <td>@(doctor.DoctorRegistration==null?"Unauthorized":"Authorized")</td>
                 <td>@(doctor.DoctorRegistration==null?"N/A":doctor.DoctorRegistration)</td>
-                <td>@(doctor.DoctorRegistration==null?"N/A":doctor.Specialization.Name)</td>
+                <td>@(doctor.Specialization==null?"N/A":doctor.Specialization.Name)</td>
 
                 <td>
                     <div class="input-group">
                         @Html.ActionLink("View", "View", "Doctors",new { id=doctor.Id}, htmlAttributes: new { @class = "btn btn-primary" })
                         @Html.ActionLink("Edit", "AdminEdit", "Doctors", new { id = doctor.Id }, htmlAttributes: new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Delete", "Delete", "Doctors",new { id=doctor.Id}, htmlAttributes: new { @class = "btn btn-danger" })
+                        <button class="btn btn-danger button-confirm" data-title="Confirm delete" data-body="Are you sure you want to delete?" data-href="\doctors\delete\@doctor.Id">Delete</button>
                     </div>
                 </td>
             </tr>

@@ -173,6 +173,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Global.asax.cs">
@@ -194,6 +195,14 @@
     <Compile Include="Migrations\202109220300202_UserIsDoctorField.Designer.cs">
       <DependentUpon>202109220300202_UserIsDoctorField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109230319101_RemoveRh.cs" />
+    <Compile Include="Migrations\202109230319101_RemoveRh.Designer.cs">
+      <DependentUpon>202109230319101_RemoveRh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109230319388_PopulateBloodTypes.cs" />
+    <Compile Include="Migrations\202109230319388_PopulateBloodTypes.Designer.cs">
+      <DependentUpon>202109230319388_PopulateBloodTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDatabase.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -204,7 +213,7 @@
     <Compile Include="Models\Specialization.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModels\AdminDoctorAuthViewModel.cs" />
-    <Compile Include="Models\ViewModels\AdminDoctorEditViewModel.cs" />
+    <Compile Include="Models\ViewModels\AdminEditViewModel.cs" />
     <Compile Include="Models\ViewModels\AppointmentCreateViewModel.cs" />
     <Compile Include="Models\ViewModels\SignInViewModel.cs" />
     <Compile Include="Models\ViewModels\SignUpViewModel.cs" />
@@ -328,6 +337,10 @@
     <Content Include="Views\Doctors\View.cshtml" />
     <Content Include="Views\Doctors\AdminEdit.cshtml" />
     <Content Include="Views\Admin\DoctorAuth.cshtml" />
+    <Content Include="Views\Shared\_ConfirmModal.cshtml" />
+    <Content Include="Views\Admin\Patients.cshtml" />
+    <Content Include="Views\Patients\View.cshtml" />
+    <Content Include="Views\Patients\AdminEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -352,6 +365,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109220300202_UserIsDoctorField.resx">
       <DependentUpon>202109220300202_UserIsDoctorField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109230319101_RemoveRh.resx">
+      <DependentUpon>202109230319101_RemoveRh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109230319388_PopulateBloodTypes.resx">
+      <DependentUpon>202109230319388_PopulateBloodTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

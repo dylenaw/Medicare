@@ -1,18 +1,18 @@
 ﻿@model Medicare.Models.User
-
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="container px-md-5 px-md-1">
 
     <div class="col-lg-6 mx-auto">
 
-        <h2>View doctor</h2>
+        <h2>View patient</h2>
         @if (Model == null)
         {
             <div class="alert alert-warning" role="alert">
-                Doctor not found
+                Patient not found
             </div>
         }
         else
@@ -27,23 +27,23 @@
             @Html.TextBoxFor(u => u.Email, new { @class = "form-control ", placeholder = "Email address", @readonly = "", disabled = "" })
             @Html.LabelFor(u => u.Email)
         </div>
+        <div class="form-floating mb-3">
+            @Html.TextAreaFor(u => u.Address, new { @class = "form-control ", placeholder = "Address", @readonly = "", disabled = "" })
+            @Html.LabelFor(u => u.Address)
+        </div>
+        <div class="form-floating mb-3">
+            @Html.TextBoxFor(u => u.Gender, new { @class = "form-control ", placeholder = "Email address", @readonly = "", disabled = "" })
+            @Html.LabelFor(u => u.Gender)
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="specialization" placeholder="Specialization" readonly disabled value='@(Model.BloodType==null?"N/A":string.Format("{0} {1}", Model.BloodType.Name,Model.BloodType.IsRhPositive?"+":"-"))'>
+            <label for="specialization">Blood type</label>
+        </div>
 
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="status" placeholder="Status" readonly disabled value=@(Model.DoctorRegistration==null?"Unauthorized":"Authorized")>
-            <label for="status">Status</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="registrationNumber" placeholder="Registration number" readonly disabled value=@(Model.DoctorRegistration==null?"N/A":Model.DoctorRegistration)>
-            <label for="registrationNumber">Registration number</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="specialization" placeholder="Specialization" readonly disabled value='@(Model.DoctorRegistration==null?"N/A":Model.Specialization.Name)'>
-            <label for="specialization">Specialization</label>
-        </div>
         @if (Medicare.Models.SessionHandler.IsUserAdmin(Session))
         {
 
-            @Html.ActionLink("Edit", "AdminEdit", "Doctors", new { id = Model.Id }, new { @class = "btn btn-lg w-100 btn-primary mb-2" })
+            @Html.ActionLink("Edit", "AdminEdit", "Patients", new { id = Model.Id }, new { @class = "btn btn-lg w-100 btn-primary mb-2" })
             <button class="btn btn-danger button-confirm btn-lg w-100" data-title="Confirm delete" data-body="Are you sure you want to delete?" data-href="\doctors\delete\@Model.Id">Delete</button>
 
         }
