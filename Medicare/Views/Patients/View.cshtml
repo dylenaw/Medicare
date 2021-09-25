@@ -1,9 +1,15 @@
 ﻿@model Medicare.Models.User
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "View patient";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/Patients">Patients</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+    </ol>
+</nav>
 <div class="container px-md-5 px-md-1">
 
     <div class="col-lg-6 mx-auto">
@@ -36,7 +42,7 @@
             @Html.LabelFor(u => u.Gender)
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="specialization" placeholder="Specialization" readonly disabled value='@(Model.BloodType==null?"N/A":string.Format("{0} {1}", Model.BloodType.Name,Model.BloodType.IsRhPositive?"+":"-"))'>
+            <input type="text" class="form-control" id="specialization" placeholder="Specialization" readonly disabled value='@(Model.BloodType==null?"N/A":Model.BloodType.Name)'>
             <label for="specialization">Blood type</label>
         </div>
 

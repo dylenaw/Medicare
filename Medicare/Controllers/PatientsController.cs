@@ -59,13 +59,28 @@ namespace Medicare.Controllers
                 database.SaveChanges();
 
 
-                return RedirectToAction("doctors", "admin");
+                return RedirectToAction("patients", "admin");
 
             }
             database.SaveChanges();
             return RedirectToAction("", "dashboard");
         }
+        public ActionResult Delete(int? id)
+        {
+            if (SessionHandler.IsUserAdmin(Session))
+            {
+                User user = database.Users.SingleOrDefault(d => d.Id == id);
+                if (user != null)
+                {
+                    database.Users.Remove(user);
+                    database.SaveChanges();
+                }
+                return RedirectToAction("patients", "admin");
 
+
+            }
+            return RedirectToAction("", "dashboard");
+        }
 
 
 

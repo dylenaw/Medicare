@@ -4,28 +4,26 @@
             <img src="~/Content/Logos/FullLogo.png" height="48" />
         </a>
 
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills ">
 
-            @if (Medicare.Models.SessionHandler.IsUserSignedIn(Session)) { 
-            <li class="nav-item">@Html.ActionLink("Dashboard", "", "dashboard", null, new { @class = "nav-link " + (ViewBag.Title == "Dashboard" ? "active" : null) })</li>
+            @if (Medicare.Models.SessionHandler.IsUserSignedIn(Session))
+            {
+                <li class="nav-item mx-1">@Html.ActionLink("Dashboard", "", "dashboard", null, new { @class = "nav-link " + (ViewBag.Title == "Dashboard" ? "active" : null) })</li>
             }
-            <li class="nav-item">@Html.ActionLink("Home","","",null,new { @class="nav-link "+(ViewBag.Title=="Home"?"active":null)})</li>
-            <li class="nav-item">@Html.ActionLink("Articles","","articles",null,new { @class="nav-link "+(ViewBag.Title.Contains("Article")?"active":null)})</li>
-            <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Gallery</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-            <li class="nav-item">
+            <li class="nav-item mx-1">@Html.ActionLink("Home", "", "", null, new { @class = "nav-link " + (ViewBag.Title == "Home" ? "active" : null) })</li>
+            <li class="nav-item mx-1">@Html.ActionLink("Our services", "Services", "", null, new { @class = "nav-link " + (ViewBag.Title == "Services" ? "active" : null) })</li>
+            <li class="nav-item mx-1">@Html.ActionLink("Articles", "", "Articles", null, new { @class = "nav-link " + (ViewBag.Title.Contains("Article") ? "active" : null) })</li>
+            <li class="nav-item mx-1"><a href="#" class="nav-link">Gallery</a></li>
+            <li class="nav-item mx-1"><a href="#" class="nav-link">FAQs</a></li>
+            <li class="nav-item mx-1">@Html.ActionLink("About", "About", "", null, new { @class = "nav-link " + (ViewBag.Title.Contains("About") ? "active" : null) })</li>
+            <li class="nav-item mx-1">
                 @if (Medicare.Models.SessionHandler.IsUserSignedIn(Session))
                 {
-                    @Html.ActionLink("Sign out", "signOut", "signIn", null, new { @class = "btn btn-outline-primary" })
+                    @Html.ActionLink("Sign out", "SignOut", "SignIn", null, new { @class = "btn btn-outline-primary" })
                 }
                 else
                 {
-                    @*<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Sign in
-            </button>*@
-                    @Html.ActionLink("Sign in", "", "signIn", null, new { @class = "btn btn-outline-primary" })
+                    @Html.ActionLink("Sign in", "", "SignIn", null, new { @class = "btn btn-outline-primary" })
 
                 }
             </li>

@@ -1,9 +1,17 @@
 ﻿@model Medicare.Models.User
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "View doctor";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/Doctors">Doctors</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+    </ol>
+</nav>
+
 <div class="container px-md-5 px-md-1">
 
     <div class="col-lg-6 mx-auto">
@@ -18,42 +26,42 @@
         else
         {
 
-    <div>
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(u => u.Name, new { @class = "form-control ", placeholder = "Name", @readonly = "", disabled = "" })
-            @Html.LabelFor(u => u.Name)
-        </div>
-        <div class="form-floating mb-3">
-            @Html.TextBoxFor(u => u.Email, new { @class = "form-control ", placeholder = "Email address", @readonly = "", disabled = "" })
-            @Html.LabelFor(u => u.Email)
-        </div>
+            <div>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(u => u.Name, new { @class = "form-control ", placeholder = "Name", @readonly = "", disabled = "" })
+                    @Html.LabelFor(u => u.Name)
+                </div>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(u => u.Email, new { @class = "form-control ", placeholder = "Email address", @readonly = "", disabled = "" })
+                    @Html.LabelFor(u => u.Email)
+                </div>
 
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="status" placeholder="Status" readonly disabled value=@(Model.DoctorRegistration==null?"Unauthorized":"Authorized")>
-            <label for="status">Status</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="registrationNumber" placeholder="Registration number" readonly disabled value=@(Model.DoctorRegistration==null?"N/A":Model.DoctorRegistration)>
-            <label for="registrationNumber">Registration number</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="specialization" placeholder="Specialization" readonly disabled value='@(Model.DoctorRegistration==null?"N/A":Model.Specialization.Name)'>
-            <label for="specialization">Specialization</label>
-        </div>
-        @if (Medicare.Models.SessionHandler.IsUserAdmin(Session))
-        {
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="status" placeholder="Status" readonly disabled value=@(Model.DoctorRegistration==null?"Unauthorized":"Authorized")>
+                    <label for="status">Status</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="registrationNumber" placeholder="Registration number" readonly disabled value=@(Model.DoctorRegistration==null?"N/A":Model.DoctorRegistration)>
+                    <label for="registrationNumber">Registration number</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="specialization" placeholder="Specialization" readonly disabled value='@(Model.DoctorRegistration==null?"N/A":Model.Specialization.Name)'>
+                    <label for="specialization">Specialization</label>
+                </div>
+                @if (Medicare.Models.SessionHandler.IsUserAdmin(Session))
+                {
 
-            @Html.ActionLink("Edit", "AdminEdit", "Doctors", new { id = Model.Id }, new { @class = "btn btn-lg w-100 btn-primary mb-2" })
-            <button class="btn btn-danger button-confirm btn-lg w-100" data-title="Confirm delete" data-body="Are you sure you want to delete?" data-href="\doctors\delete\@Model.Id">Delete</button>
+                    @Html.ActionLink("Edit", "AdminEdit", "Doctors", new { id = Model.Id }, new { @class = "btn btn-lg w-100 btn-primary mb-2" })
+                    <button class="btn btn-danger button-confirm btn-lg w-100" data-title="Confirm delete" data-body="Are you sure you want to delete?" data-href="\doctors\delete\@Model.Id">Delete</button>
 
-        }
-        else if (Medicare.Models.SessionHandler.GetUserId(Session) == Model.Id)
-        {
-            @Html.ActionLink("Edit", "Edit", "Doctors", new { id = Model.Id }, new { @class = "btn btn-lg w-100 btn-primary mb-2" })
+                }
+                else if (Medicare.Models.SessionHandler.GetUserId(Session) == Model.Id)
+                {
+                    @Html.ActionLink("Edit", "Edit", "Doctors", new { id = Model.Id }, new { @class = "btn btn-lg w-100 btn-primary mb-2" })
 
-        }
+                }
 
-    </div>
+            </div>
 
 
         }

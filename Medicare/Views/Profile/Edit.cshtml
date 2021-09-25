@@ -1,0 +1,92 @@
+﻿@model Medicare.Models.User
+
+@{
+    ViewBag.Title = "Edit profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+    </ol>
+</nav>
+
+
+<div class="container px-md-5 px-md-1">
+
+    <div class="col-lg-6 mx-auto">
+        <h2>Edit</h2>
+
+
+        @using (Html.BeginForm("Save", "Profile"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Name)
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "", disabled = "" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "", disabled = "" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field BirthDate must be a date." id="BirthDate" name="BirthDate" type="Date" value="@(Model.BirthDate.HasValue?Model.BirthDate.Value.ToString("yyyy-MM-dd"):null)">                        @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="Gender" id="GenderMale" value="Male" autocomplete="off" checked>
+                        <label class="btn btn-outline-primary" for="GenderMale">Male</label>
+
+                        <input type="radio" class="btn-check" name="Gender" value="Female" id="GenderFemale" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="GenderFemale">Female</label>
+
+                    </div>
+                </div>
+                @if (Model.IsDoctor)
+                {
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.SpecializationId, "SpecializationId", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.DropDownList("SpecializationId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SpecializationId, "", new { @class = "text-danger" })
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.BloodTypeId, "BloodTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.DropDownList("BloodTypeId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BloodTypeId, "", new { @class = "text-danger" })
+                    </div>
+                }
+
+
+
+
+
+                <div class="form-group mb-3">
+                    <input type="submit" value="Save" class="btn btn-primary btn-lg w-100 " />
+                </div>
+            </div>
+        }
+    </div>
+</div>

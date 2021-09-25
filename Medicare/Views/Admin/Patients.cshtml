@@ -4,6 +4,12 @@
     ViewBag.Title = "Patients";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+    </ol>
+</nav>
 
 <form>
     <div class="input-group mb-3">
@@ -13,36 +19,44 @@
 </form>
 
 
-<table class="table table-hover table-responsive table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Gender</th>
-            <th>Blood type</th>
-            <th></th>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Medicare.Models.User patient in Model)
-        {
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-warning" role="alert">
+        Patients not found
+    </div>
+}
+else
+{
+    <table class="table table-hover table-responsive table-striped align-middle">
+        <thead>
             <tr>
-                <td>@patient.Name</td>
-                <td>@patient.Email</td>
-                <td>@patient.Address</td>
-                <td>@patient.Gender</td>
-                <td>@(patient.BloodType==null?"N/A":string.Format("{0} {1}", patient.BloodType.Name,patient.BloodType.IsRhPositive?"+":"-"))</td>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Blood type</th>
+                <th></th>
 
-                <td>
-                    <div class="input-group">
-                        @Html.ActionLink("View", "View", "Patients", new { id = patient.Id }, htmlAttributes: new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Edit", "AdminEdit", "Patients", new { id = patient.Id }, htmlAttributes: new { @class = "btn btn-warning" })
-                        <button class="btn btn-danger button-confirm" data-title="Confirm delete" data-body="Are you sure you want to delete?" data-href="\doctors\delete\@patient.Id">Delete</button>
-                    </div>
-                </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (Medicare.Models.User patient in Model)
+            {
+                <tr>
+                    <td>@patient.Name</td>
+                    <td>@patient.Email</td>
+                    <td>@patient.Address</td>
+                    <td>@patient.Gender</td>
+                    <td>@(patient.BloodType==null?"N/A":patient.BloodType.Name)</td>
+
+                    <td>
+                        <div class="input-group">
+                            @Html.ActionLink("View", "View", "Patients", new { id = patient.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Edit", "AdminEdit", "Patients", new { id = patient.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                            <button class="btn btn-danger button-confirm" data-title="Confirm delete" data-body="Are you sure you want to delete?" data-href="\patients\delete\@patient.Id">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>}

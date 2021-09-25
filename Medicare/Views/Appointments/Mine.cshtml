@@ -1,4 +1,5 @@
 ﻿@model Medicare.Models.ViewModels.AppointmentsViewModel
+
 @{
     ViewBag.Title = "Appointments";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,9 +10,9 @@
         <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
     </ol>
 </nav>
-<h2 class="mb-3">My appointments</h2>
+<h2 class=" mb-3">My appointments</h2>
 
-@using (Html.BeginForm("", "appointments"))
+@using (Html.BeginForm("mine", "appointments"))
 {
     <div class="btn-group d-flex mb-2" role="group" aria-label="Basic checkbox toggle button group">
 
@@ -25,7 +26,7 @@
         <label class="btn btn-outline-primary" for="ShowFuture">Show futute appointments</label>
     </div>
     <div class="input-group mb-3">
-        <input type="text" name="search" class="form-control" placeholder="Doctor name,doctor email, doctor specialization or reason" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" name="search" class="form-control" placeholder="Patient name, email, or reason" aria-label="Recipient's username" aria-describedby="button-addon2">
         <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
     </div>
 }
@@ -34,8 +35,8 @@
     <thead>
         <tr>
             <th>Date</th>
-            <th>Doctor name</th>
-            <th>Doctor specialization</th>
+            <th>Patient name</th>
+            <th>Patient email</th>
             <th>Reason</th>
             <th></th>
         </tr>
@@ -45,20 +46,17 @@
         {
             <tr>
                 <td>@appointment.DateTime.ToString("yyyy/MM/dd")</td>
-                <td>@appointment.Doctor.Name</td>
-                <td>@appointment.Doctor.Specialization.Name</td>
+                <td>@appointment.Patient.Name</td>
+                <td>@appointment.Patient.Email</td>
                 <td>@appointment.Reason</td>
                 <td>
-                    <div class="btn-group">
-                        @Html.ActionLink("Appointment slip", "ViewPdf", "Appointments", new { id = appointment.Id }, htmlAttributes: new { @class = "btn btn-success" })
-                        @Html.ActionLink("View", "View", "Appointments", new { id = appointment.Id }, htmlAttributes: new { @class = "btn btn-primary" })
-
-
-                    </div>
-                    </td>
+                    @Html.ActionLink("View", "View", "Appointments", new { id = appointment.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+                </td>
             </tr>
         }
 
     </tbody>
 </table>
+
+
 
