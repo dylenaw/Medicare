@@ -82,12 +82,6 @@ namespace Medicare.Controllers
             return View(patients);
         }
 
-
-        public ActionResult Appointments2(AppointmentsViewModel model)
-        {
-            return Content(string.Format("{0} {1} {2}", model.ShowFuture, model.ShowPresent, model.ShowPast));
-        }
-
         public ActionResult Appointments(AppointmentsViewModel model)
         {
             if (!SessionHandler.IsUserAdmin(Session)) return RedirectToAction("", "dashboard");
@@ -115,5 +109,4 @@ namespace Medicare.Controllers
 
 
     }
-
 }

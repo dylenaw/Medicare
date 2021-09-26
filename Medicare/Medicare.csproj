@@ -212,6 +212,14 @@
     <Compile Include="Migrations\202109230319388_PopulateBloodTypes.Designer.cs">
       <DependentUpon>202109230319388_PopulateBloodTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109251620219_AdditionalDetailsForUser.cs" />
+    <Compile Include="Migrations\202109251620219_AdditionalDetailsForUser.Designer.cs">
+      <DependentUpon>202109251620219_AdditionalDetailsForUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109251621535_RemoveAdditionalDetailsForUser.cs" />
+    <Compile Include="Migrations\202109251621535_RemoveAdditionalDetailsForUser.Designer.cs">
+      <DependentUpon>202109251621535_RemoveAdditionalDetailsForUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDatabase.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -356,6 +364,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\POCO\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -383,6 +392,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109230319388_PopulateBloodTypes.resx">
       <DependentUpon>202109230319388_PopulateBloodTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109251620219_AdditionalDetailsForUser.resx">
+      <DependentUpon>202109251620219_AdditionalDetailsForUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109251621535_RemoveAdditionalDetailsForUser.resx">
+      <DependentUpon>202109251621535_RemoveAdditionalDetailsForUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
