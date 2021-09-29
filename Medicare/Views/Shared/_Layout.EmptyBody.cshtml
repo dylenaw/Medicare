@@ -9,9 +9,11 @@
 
 </head>
 
-        @RenderBody()
-        
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@RenderBody()
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/medicare")
+@RenderSection("scripts", required: false)
 </html>

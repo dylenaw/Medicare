@@ -17,13 +17,19 @@
 }
 else
 {
-    <table class="table table-hover table-striped table-responsive ">
+    <table class="table table-hover table-striped table-responsive align-middle ">
         <tbody>
             @foreach (Medicare.Models.Article article in Model)
             {
-                <tr class="clickable-row" data-href='/articles/view/@article.Id'>
-                    <td>@article.Title</td>
+                <tr>
+                    <td >@article.Title</td>
                     <td style="text-align:right">@article.Time.ToString("yyyy MMM dd hh.mm tt")</td>
+                    <td style="text-align:right">
+                        <a class="btn btn-success"  href='/articles/view/@article.Id'>View</a>
+                    <button class="button-confirm btn btn-danger" data-href="/Articles/Delete/@article.Id" data-title="Confirm Delete" data-body="Delete this article?">
+                        Delete
+                    </button>
+                    </td>
                 </tr>
             }
         </tbody>

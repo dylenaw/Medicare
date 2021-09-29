@@ -11,7 +11,8 @@ namespace Medicare.Controllers
         public ActionResult Index()
         {
             return View();
-        }   public ActionResult Services()
+        }
+        public ActionResult Services()
         {
             return View();
         }
@@ -24,12 +25,21 @@ namespace Medicare.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Gallery()
+        {
+
+            return View();
+        }
+        public ActionResult Faqs()
+        {
 
             return View();
         }
 
 
-        
+
     }
 }

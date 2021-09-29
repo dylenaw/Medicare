@@ -20,7 +20,7 @@ namespace Medicare.Controllers
         // GET: Articles
         public ActionResult Index()
         {
-            List<Article> articles = database.Articles.ToList();
+            List<Article> articles = database.Articles.Include(a=>a.User).ToList();
             return View(articles);
         }
         public ActionResult Create()
@@ -43,7 +43,7 @@ namespace Medicare.Controllers
                 }
             }
 
-            return Content("No article found");
+            return HttpNotFound();
         }
         public ActionResult Delete(int? id)
         {
@@ -56,16 +56,17 @@ namespace Medicare.Controllers
                 {
                     database.Articles.Remove(article);
                     database.SaveChanges();
-                    return RedirectToAction("");
+                    return RedirectToAction("mine", "articles");
                 }
             }
 
-            return Content("No article found");
+            return HttpNotFound();
         }
 
 
         public ActionResult Save(Article article)
         {
+            if (!SessionHandler.IsUserDoctor(Session)) RedirectToAction("", "dashboard");
             article.Time = DateTime.Now;
             if (article.Id == 0)
             {
@@ -79,7 +80,7 @@ namespace Medicare.Controllers
                 dbArticle.Description = article.Description;
             }
             database.SaveChanges();
-            return RedirectToAction("index","articles");
+            return RedirectToAction("mine","articles");
         }
 
         public ActionResult View(int? id)
@@ -93,8 +94,8 @@ namespace Medicare.Controllers
                 }
             }
 
-            return Content("No article found");
-            
+            return HttpNotFound();
+
         }
         public ActionResult Mine()
         {

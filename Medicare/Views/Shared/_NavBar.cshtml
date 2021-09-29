@@ -13,8 +13,8 @@
             <li class="nav-item mx-1">@Html.ActionLink("Home", "", "", null, new { @class = "nav-link " + (ViewBag.Title == "Home" ? "active" : null) })</li>
             <li class="nav-item mx-1">@Html.ActionLink("Our services", "Services", "", null, new { @class = "nav-link " + (ViewBag.Title == "Services" ? "active" : null) })</li>
             <li class="nav-item mx-1">@Html.ActionLink("Articles", "", "Articles", null, new { @class = "nav-link " + (ViewBag.Title.Contains("Article") ? "active" : null) })</li>
-            <li class="nav-item mx-1"><a href="#" class="nav-link">Gallery</a></li>
-            <li class="nav-item mx-1"><a href="#" class="nav-link">FAQs</a></li>
+            <li class="nav-item mx-1">@Html.ActionLink("Gallery", "Gallery", "", null, new { @class = "nav-link " + (ViewBag.Title.Contains("Gallery") ? "active" : null) })</li>
+            <li class="nav-item mx-1">@Html.ActionLink("FAQs", "FAQs", "", null, new { @class = "nav-link " + (ViewBag.Title.Contains("FAQ") ? "active" : null) })</li>
             <li class="nav-item mx-1">@Html.ActionLink("About", "About", "", null, new { @class = "nav-link " + (ViewBag.Title.Contains("About") ? "active" : null) })</li>
             <li class="nav-item mx-1">
                 @if (Medicare.Models.SessionHandler.IsUserSignedIn(Session))

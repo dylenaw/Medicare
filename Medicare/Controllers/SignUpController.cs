@@ -26,10 +26,13 @@ namespace Medicare.Controllers
         }
 
         public ActionResult SignUp(SignUpViewModel model) {
+            if(model==null) return RedirectToAction("", "SignUp");
+
+
             User user = database.Users.SingleOrDefault(u => u.Email == model.Email);
             if (user != null)
             {
-                return Content("User already exists, sign in instead");
+                return UserExist(model.Email);
             }
             else
             {
@@ -43,9 +46,27 @@ namespace Medicare.Controllers
                 };
                 database.Users.Add(user);
                 database.SaveChanges();
-                return Content("Sign up successful, continue to sign in");
+                return Success(model.Email);
             }
 
         }
+
+        public ActionResult Success(string email)
+        {
+            if (email == null)
+            {
+                return RedirectToAction("", "SignUp");
+            }
+            return View(model: email);
+        }
+        public ActionResult UserExist(string email)
+        {
+            if (email == null)
+            {
+                return RedirectToAction("", "SignUp");
+            }
+            return View(model: email);
+        }
+
     }
 }

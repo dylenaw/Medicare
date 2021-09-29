@@ -7,6 +7,7 @@ namespace Medicare.Models
 {
     public class SessionHandler
     {
+
         public static User GetUser(HttpSessionStateBase session)
         {
             return (User)session["user"];

@@ -13,6 +13,7 @@ namespace Medicare.Models.ViewModels
         [Required(ErrorMessage = "This field is required")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "This field is required")]
         [StringLength(128, ErrorMessage = "Password should contain atleast 8 characters", MinimumLength = 8)]
         public string Password { get; set; }
 

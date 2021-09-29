@@ -178,8 +178,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\ChartsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -257,11 +259,19 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\ErrorCodes\404.png" />
+    <Content Include="Content\ErrorCodes\500.png" />
     <Content Include="Content\Images\Carousel\Image0.png" />
     <Content Include="Content\Images\Carousel\Image2.png" />
     <Content Include="Content\Images\Carousel\Image3.png" />
     <Content Include="Content\Images\Carousel\Image4.png" />
     <Content Include="Content\Images\Carousel\Image1.png" />
+    <Content Include="Content\Images\Gallery\image1.jpg" />
+    <Content Include="Content\Images\Gallery\image2.jpg" />
+    <Content Include="Content\Images\Gallery\image3.jpg" />
+    <Content Include="Content\Images\Gallery\image4.jpg" />
+    <Content Include="Content\Images\Gallery\image5.jpg" />
+    <Content Include="Content\Images\Gallery\image6.jpg" />
     <Content Include="Content\Logos\Favicon.png" />
     <Content Include="Content\Logos\FullLogo.png" />
     <Content Include="Content\Logos\Logo.png" />
@@ -317,7 +327,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -361,6 +370,14 @@
     <Content Include="Views\Home\Services.cshtml" />
     <Content Include="Views\Profile\View.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\SignUp\Success.cshtml" />
+    <Content Include="Views\SignUp\UserExist.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Home\Faqs.cshtml" />
+    <Content Include="Views\Patients\ViewBloodChart.cshtml" />
+    <Content Include="Views\Charts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,10 +1,13 @@
 ﻿using Medicare.Models;
 using Medicare.Models.ViewModels;
-using System;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Grid;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
-using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace Medicare.Controllers
@@ -26,7 +29,7 @@ namespace Medicare.Controllers
                 id = 0;
             }
 
-            User patient = database.Users.Include(u=>u.BloodType).Where(d => !d.IsDoctor && !d.IsAdmin && d.Id == id).SingleOrDefault();
+            User patient = database.Users.Include(u => u.BloodType).Where(d => !d.IsDoctor && !d.IsAdmin && d.Id == id).SingleOrDefault();
             return View(patient);
         }
 
@@ -42,7 +45,7 @@ namespace Medicare.Controllers
             return View(
                 new AdminEditViewModel
                 {
-                    User=user,
+                    User = user,
                     BloodTypes = bloodTypes
                 }
                 );
@@ -82,8 +85,34 @@ namespace Medicare.Controllers
             return RedirectToAction("", "dashboard");
         }
 
+        public ActionResult ViewPdf()
+        {
+            if (!SessionHandler.IsUserAdmin(Session)) return RedirectToAction("", "Dashboard");
+            List<User> patients = database.Users.Include(u => u.BloodType).Where(a => !a.IsDoctor && !a.IsAdmin).ToList();
 
+            PdfDocument document = new PdfDocument();
+            PdfPage page = document.Pages.Add();
+            PdfGrid pdfGrid = new PdfGrid();
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("    " + "Name");
+            dataTable.Columns.Add("    " + "Gender");
+            dataTable.Columns.Add("    " + "Email Address");
+            dataTable.Columns.Add("    " + "Date of birth");
+            dataTable.Columns.Add("    " + "Blood type");
 
+            foreach (User patient in patients)
+            {
+                string bloodtype = patient.BloodType == null ? "Not updated" : patient.BloodType.Name;
+                string dob = patient.BirthDate == null ? "Not updated" : patient.BirthDate.Value.ToString("yyyy MMM dd");
+                dataTable.Rows.Add("    " + patient.Name, "    " + patient.Gender, "    " + patient.Email, "    " + dob, "    " + bloodtype);
+            }
+            pdfGrid.DataSource = dataTable;
+            pdfGrid.Draw(page, new PointF(10, 10));
+            document.Save("Output.pdf", HttpContext.ApplicationInstance.Response, HttpReadType.Save);
+            document.Close(true);
+            return View();
+        }
 
+        
     }
 }

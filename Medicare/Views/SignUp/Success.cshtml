@@ -1,0 +1,16 @@
+﻿@model string
+@{
+    ViewBag.Title = "Sign up Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="~/Content/Logos/FullLogo.png" alt="" height="64">
+    <h1 class="display-5 fw-bold">Sign up sucessful</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">You have successfully created the account for <b>@Model</b>.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="/SignIn" class="btn btn-primary btn-lg px-4 gap-3">Sign in</a>
+        </div>
+    </div>
+</div>
